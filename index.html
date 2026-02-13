@@ -1,309 +1,523 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Hunter | YouTube & Insta</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- MODERN TASARIM & ANİMASYONLAR --- */
-        :root {
-            --primary-grad: linear-gradient(45deg, #FF0050, #00F2EA);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --neon-glow: 0 0 20px rgba(0, 242, 234, 0.3);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sevgililer Günü 💚</title>
 
-        body {
-            margin: 0;
-            height: 100vh;
-            font-family: 'Outfit', sans-serif;
-            background: #0f0c29;
-            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
+  <!-- Google Fonts: Cormorant Garamond (zarif serif) + Montserrat (modern sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@100;200;300;400;600&display=swap" rel="stylesheet" />
 
-        /* Arka Plan Hareketli Efekt */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(255,0,80,0.15) 0%, rgba(0,0,0,0) 70%);
-            animation: pulse 10s infinite alternate;
-            z-index: 0;
-        }
+  <style>
+    /* ============================================================
+       CSS VARIABLES & RESET
+    ============================================================ */
+    :root {
+      --black:       #000000;
+      --deep-green:  #0B3D2E;
+      --emerald:     #00A86B;
+      --light-green: #1DB87A;
+      --glow-green:  #00ff99;
+      --mint:        #a8ffd4;
+      --white:       #f0fff8;
+    }
 
-        @keyframes pulse {
-            0% { transform: translate(-10%, -10%) scale(1); }
-            100% { transform: translate(10%, 10%) scale(1.2); }
-        }
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            position: relative;
-            z-index: 10;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Tam ekran */
+    }
 
-        .brand-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--primary-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    /* ============================================================
+       BODY — Siyah arka plan, yeşil glow atmosferi
+    ============================================================ */
+    body {
+      background: var(--black);
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      cursor: default;
+    }
 
-        h1 {
-            font-size: 2rem;
-            margin: 0 0 10px 0;
-            font-weight: 700;
-        }
+    /* ============================================================
+       ARKA PLAN — Radial glow lekeleri
+    ============================================================ */
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        p.subtitle {
-            color: #aaa;
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-        }
+    /* Sol alt yeşil glow */
+    .bg-glow::before {
+      content: '';
+      position: absolute;
+      width: 60vw;
+      height: 60vw;
+      bottom: -20vw;
+      left: -15vw;
+      background: radial-gradient(circle, rgba(0, 168, 107, 0.18) 0%, transparent 70%);
+      animation: glowPulse 6s ease-in-out infinite alternate;
+    }
 
-        .social-badges {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 2rem;
-        }
+    /* Sağ üst yeşil glow */
+    .bg-glow::after {
+      content: '';
+      position: absolute;
+      width: 50vw;
+      height: 50vw;
+      top: -15vw;
+      right: -10vw;
+      background: radial-gradient(circle, rgba(0, 255, 153, 0.10) 0%, transparent 70%);
+      animation: glowPulse 8s ease-in-out infinite alternate-reverse;
+    }
 
-        .badge {
-            background: rgba(255,255,255,0.1);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-        
-        .badge:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
-        .badge i { font-size: 1.1em; }
-        .yt { color: #ff0000; }
-        .ig { color: #e1306c; }
+    @keyframes glowPulse {
+      0%   { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 1;   transform: scale(1.1); }
+    }
 
-        .input-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
+    /* ============================================================
+       PARTİKEL CANVAS
+    ============================================================ */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
 
-        input {
-            width: 100%;
-            padding: 16px 20px;
-            border-radius: 12px;
-            border: 2px solid var(--glass-border);
-            background: rgba(0,0,0,0.3);
-            color: white;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: 0.3s;
-            outline: none;
-        }
+    /* ============================================================
+       ANA KAPSAYICI
+    ============================================================ */
+    .container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 3.5rem;
+      padding: 2rem 1.5rem;
+      max-width: 900px;
+      width: 100%;
+    }
 
-        input:focus {
-            border-color: #00F2EA;
-            box-shadow: var(--neon-glow);
-        }
+    /* ============================================================
+       ÜST İNCE ÇİZGİ SÜSÜ
+    ============================================================ */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeSlideUp 1.2s ease-out 0.3s forwards;
+    }
 
-        .main-btn {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            background: var(--primary-grad);
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .ornament-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--emerald), transparent);
+    }
 
-        .main-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 242, 234, 0.3);
-        }
+    .ornament-diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--emerald);
+      transform: rotate(45deg);
+      box-shadow: 0 0 8px var(--emerald), 0 0 16px var(--emerald);
+    }
 
-        .main-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+    /* ============================================================
+       M ❤️ N — Merkez Blok
+    ============================================================ */
+    .heart-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.5rem, 5vw, 4rem);
+      opacity: 0;
+      animation: fadeSlideUp 1.4s ease-out 0.6s forwards;
+    }
 
-        /* Sonuç Alanı */
-        #result-area {
-            margin-top: 2rem;
-            display: none;
-            animation: slideUp 0.5s ease forwards;
-        }
+    /* M ve N harfleri */
+    .letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(5rem, 16vw, 11rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1;
+      text-shadow:
+        0 0 20px rgba(0, 255, 153, 0.4),
+        0 0 60px rgba(0, 168, 107, 0.2);
+      transition: text-shadow 0.5s ease;
+      user-select: none;
+    }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .letter:hover {
+      text-shadow:
+        0 0 30px rgba(0, 255, 153, 0.9),
+        0 0 80px rgba(0, 255, 153, 0.4),
+        0 0 140px rgba(0, 168, 107, 0.3);
+    }
 
-        .download-card {
-            background: rgba(255,255,255,0.08);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+    /* Kalp — CSS ile çizilmiş, pulse animasyonlu */
+    .heart-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: heartbeat 1.6s ease-in-out infinite;
+    }
 
-        .success-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #00b894;
-            color: white;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-        
-        .success-btn:hover { background: #00a884; transform: scale(1.05); }
+    .heart-svg {
+      width: clamp(3rem, 8vw, 6rem);
+      height: clamp(3rem, 8vw, 6rem);
+      filter:
+        drop-shadow(0 0 12px rgba(0, 255, 153, 0.8))
+        drop-shadow(0 0 30px rgba(0, 168, 107, 0.5));
+    }
 
-        .loader {
-            display: none;
-            font-size: 1.5rem;
-            color: #00F2EA;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
+    .heart-svg path {
+      fill: var(--emerald);
+    }
 
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        .error-msg { color: #ff6b6b; font-size: 0.9rem; margin-top: 10px; }
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      14%  { transform: scale(1.25); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.18); }
+      70%  { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
 
-    </style>
+    /* ============================================================
+       METİN BLOKU — Satır satır animasyonlu
+    ============================================================ */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Her satır ayrı ayrı animasyonlu */
+    .line {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Üst küçük metin */
+    .line-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.6rem, 2vw, 0.75rem);
+      font-weight: 200;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--emerald);
+      text-shadow: 0 0 10px rgba(0, 168, 107, 0.5);
+    }
+
+    /* Ana başlık satırları */
+    .line-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 4.5vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-shadow:
+        0 0 15px rgba(0, 255, 153, 0.25),
+        0 0 40px rgba(0, 168, 107, 0.15);
+      transition: text-shadow 0.4s ease;
+    }
+
+    .line-main:hover {
+      text-shadow:
+        0 0 20px rgba(0, 255, 153, 0.7),
+        0 0 60px rgba(0, 255, 153, 0.3);
+    }
+
+    /* Özel vurgulu satır */
+    .line-accent {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 5.5vw, 3rem);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--emerald);
+      text-shadow:
+        0 0 20px rgba(0, 255, 153, 0.6),
+        0 0 50px rgba(0, 168, 107, 0.4);
+      transition: text-shadow 0.4s ease;
+    }
+
+    .line-accent:hover {
+      text-shadow:
+        0 0 30px rgba(0, 255, 153, 1),
+        0 0 70px rgba(0, 255, 153, 0.5),
+        0 0 120px rgba(0, 168, 107, 0.3);
+    }
+
+    /* ============================================================
+       ALT SÜS — İnce yatay çizgi + tarih
+    ============================================================ */
+    .footer-ornament {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      opacity: 0;
+      animation: fadeSlideUp 1.2s ease-out 3.6s forwards;
+    }
+
+    .footer-line {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--emerald), transparent);
+    }
+
+    .footer-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.55rem, 1.8vw, 0.68rem);
+      font-weight: 200;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(0, 168, 107, 0.55);
+    }
+
+    /* ============================================================
+       GENEL FADE + SLIDE-UP ANİMASYONU
+    ============================================================ */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================================
+       PARLAKLAYAN NOKTA GRUBU (köşe süsü)
+    ============================================================ */
+    .corner-dots {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .corner-dots.tl { top: 1.5rem; left: 1.5rem; }
+    .corner-dots.tr { top: 1.5rem; right: 1.5rem; }
+    .corner-dots.bl { bottom: 1.5rem; left: 1.5rem; }
+    .corner-dots.br { bottom: 1.5rem; right: 1.5rem; }
+
+    .corner-bracket {
+      width: 28px;
+      height: 28px;
+      opacity: 0.35;
+    }
+
+    .corner-dots.tl .corner-bracket { border-top: 1px solid var(--emerald); border-left: 1px solid var(--emerald); }
+    .corner-dots.tr .corner-bracket { border-top: 1px solid var(--emerald); border-right: 1px solid var(--emerald); }
+    .corner-dots.bl .corner-bracket { border-bottom: 1px solid var(--emerald); border-left: 1px solid var(--emerald); }
+    .corner-dots.br .corner-bracket { border-bottom: 1px solid var(--emerald); border-right: 1px solid var(--emerald); }
+
+    /* ============================================================
+       MOBİL UYUMLULUK
+    ============================================================ */
+    @media (max-width: 480px) {
+      .container { gap: 2.2rem; }
+      .ornament-line { width: 50px; }
+      .footer-line { width: 80px; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="brand-icon">
-            <i class="fa-solid fa-cloud-arrow-down"></i>
-        </div>
-        <h1>Video Hunter</h1>
-        <p class="subtitle">YouTube & Instagram Videolarını Saniyeler İçinde İndir</p>
+  <!-- Arka plan glow katmanı -->
+  <div class="bg-glow" aria-hidden="true"></div>
 
-        <div class="social-badges">
-            <div class="badge"><i class="fa-brands fa-youtube yt"></i> YouTube</div>
-            <div class="badge"><i class="fa-brands fa-instagram ig"></i> Instagram</div>
-        </div>
+  <!-- Partikül canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-        <div class="input-group">
-            <input type="text" id="urlInput" placeholder="Video linkini buraya yapıştır...">
-        </div>
+  <!-- Köşe süsleri -->
+  <div class="corner-dots tl" aria-hidden="true"><div class="corner-bracket"></div></div>
+  <div class="corner-dots tr" aria-hidden="true"><div class="corner-bracket"></div></div>
+  <div class="corner-dots bl" aria-hidden="true"><div class="corner-bracket"></div></div>
+  <div class="corner-dots br" aria-hidden="true"><div class="corner-bracket"></div></div>
 
-        <button class="main-btn" onclick="fetchVideo()" id="actionBtn">
-            İndirme Linkini Bul
-        </button>
+  <!-- ANA İÇERİK -->
+  <main class="container" role="main">
 
-        <i class="fa-solid fa-circle-notch loader" id="loader"></i>
-
-        <div id="result-area">
-            <div class="download-card">
-                <h3 style="margin: 0 0 10px 0;">🎉 Video Hazır!</h3>
-                <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 15px;">Aşağıdaki butona tıkla veya sağ tıklayıp "Farklı Kaydet" de.</p>
-                <a href="#" id="downloadLink" target="_blank" class="success-btn">
-                    <i class="fa-solid fa-download"></i> MP4 İNDİR
-                </a>
-            </div>
-        </div>
-        
-        <div id="error-area" class="error-msg"></div>
+    <!-- Üst süs çizgisi -->
+    <div class="ornament" aria-hidden="true">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
     </div>
 
-    <script>
-        // ==========================================================
-        // DİKKAT: API KEY'İNİ AŞAĞIDAKİ TIRNAKLARIN İÇİNE YAPIŞTIR
-        // ==========================================================
-        const API_KEY = 'f40a76af88msh108e96de03f35cdp14390fjsnf12f734d2e7e'; 
-        const API_HOST = 'social-media-video-downloader.p.rapidapi.com';
-        // ==========================================================
+    <!-- M ❤️ N -->
+    <div class="heart-block" aria-label="M kalp N">
+      <span class="letter">M</span>
 
-        async function fetchVideo() {
-            const input = document.getElementById('urlInput');
-            const btn = document.getElementById('actionBtn');
-            const loader = document.getElementById('loader');
-            const resultArea = document.getElementById('result-area');
-            const downloadLink = document.getElementById('downloadLink');
-            const errorArea = document.getElementById('error-area');
+      <div class="heart-wrapper" aria-hidden="true">
+        <!-- SVG Kalp -->
+        <svg class="heart-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 85 C50 85 5 52 5 28 C5 14 15 5 28 5 C36 5 44 10 50 18 C56 10 64 5 72 5 C85 5 95 14 95 28 C95 52 50 85 50 85 Z"/>
+        </svg>
+      </div>
 
-            // Temizlik
-            errorArea.innerText = '';
-            resultArea.style.display = 'none';
+      <span class="letter">N</span>
+    </div>
 
-            if (!input.value) {
-                errorArea.innerText = '⚠️ Lütfen geçerli bir link yapıştırın.';
-                return;
-            }
+    <!-- Metin bloğu -->
+    <div class="text-block" id="text-block" aria-label="Sevgililer Günü mesajı">
+      <p class="line line-sub"  data-delay="800">2 0 2 5</p>
+      <p class="line line-main" data-delay="1100">2025'te hayatıma giren</p>
+      <p class="line line-accent" data-delay="1500">en güzel şey sevgilim</p>
+      <p class="line line-main" data-delay="2000">Sevgililer Günümüz</p>
+      <p class="line line-accent" data-delay="2500">kutlu olsun</p>
+      <p class="line line-main" data-delay="3000">Nisam 🌿</p>
+    </div>
 
-            if (API_KEY === 'BURAYA_API_KEY_GELECEK') {
-                errorArea.innerText = '⚠️ API Key eksik! Kodu düzenleyip keyi ekleyin.';
-                return;
-            }
+    <!-- Alt süs -->
+    <div class="footer-ornament" aria-hidden="true">
+      <div class="footer-line"></div>
+      <p class="footer-date">14 Şubat 2025 • Sevgililer Günü</p>
+    </div>
 
-            // Yükleniyor Animasyonu
-            btn.style.display = 'none';
-            loader.style.display = 'block';
+  </main>
 
-            try {
-                const response = await fetch(`https://${API_HOST}/smvd/get/all?url=${encodeURIComponent(input.value)}`, {
-                    method: 'GET',
-                    headers: {
-                        'x-rapidapi-key': API_KEY,
-                        'x-rapidapi-host': API_HOST
-                    }
-                });
+  <script>
+    /* ============================================================
+       1. SATIR SATIR YAZI ANİMASYONU
+       Her satır kendi data-delay değeriyle gelir
+    ============================================================ */
+    document.addEventListener('DOMContentLoaded', () => {
+      const lines = document.querySelectorAll('.line');
 
-                const data = await response.json();
+      lines.forEach(line => {
+        const delay = parseInt(line.dataset.delay) || 0;
+        setTimeout(() => {
+          line.classList.add('visible');
+        }, delay);
+      });
+    });
 
-                if (data.links && data.links.length > 0) {
-                    // İlk linki al (Genelde en kalitelisi budur)
-                    const videoUrl = data.links[0].link;
-                    
-                    downloadLink.href = videoUrl;
-                    resultArea.style.display = 'block';
-                } else {
-                    errorArea.innerText = '❌ Video bulunamadı. Gizli profil veya geçersiz link olabilir.';
-                }
+    /* ============================================================
+       2. PARTİKEL SİSTEMİ
+       Arka planda yavaşça süzülen küçük yeşil ışık noktaları
+    ============================================================ */
+    (function initParticles() {
+      const canvas  = document.getElementById('particle-canvas');
+      const ctx     = canvas.getContext('2d');
+      let   W, H;
+      const PARTICLE_COUNT = 55;
+      const particles = [];
 
-            } catch (error) {
-                console.error(error);
-                errorArea.innerText = '❌ Bir hata oluştu. Lütfen tekrar dene.';
-            } finally {
-                // Eski haline getir
-                loader.style.display = 'none';
-                btn.style.display = 'block';
-                btn.innerText = 'Yeni Video Ara';
-            }
+      /* Canvas boyutunu güncelle */
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      /* Renk paleti — yeşil tonlar */
+      const COLORS = [
+        'rgba(0,  168, 107, ',   // emerald
+        'rgba(0,  255, 153, ',   // glow green
+        'rgba(29, 184, 122, ',   // light green
+        'rgba(168,255,212, ',    // mint
+      ];
+
+      /* Tek bir parçacık */
+      function Particle() {
+        this.reset();
+      }
+
+      Particle.prototype.reset = function () {
+        this.x     = Math.random() * W;
+        this.y     = Math.random() * H;
+        this.r     = Math.random() * 2.2 + 0.4;   // yarıçap 0.4–2.6
+        this.vx    = (Math.random() - 0.5) * 0.25; // yatay hız
+        this.vy    = -(Math.random() * 0.35 + 0.1);// yukarı doğru yavaş
+        this.alpha = Math.random() * 0.6 + 0.15;
+        this.alphaDir = (Math.random() > 0.5) ? 0.003 : -0.003;
+        this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      };
+
+      Particle.prototype.update = function () {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        /* Alpha (parlaklık) titreşimi */
+        this.alpha += this.alphaDir;
+        if (this.alpha > 0.8 || this.alpha < 0.05) {
+          this.alphaDir *= -1;
         }
-    </script>
+
+        /* Ekranı aşınca sıfırla */
+        if (this.y < -10 || this.x < -10 || this.x > W + 10) {
+          this.reset();
+          this.y = H + 10; // alttan başla
+        }
+      };
+
+      Particle.prototype.draw = function () {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + this.alpha + ')';
+        ctx.fill();
+
+        /* Küçük glow halkası */
+        if (this.r > 1.5) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = this.color + (this.alpha * 0.18) + ')';
+          ctx.fill();
+        }
+      };
+
+      /* Parçacıkları oluştur */
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+
+      /* Animasyon döngüsü */
+      function animate() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (const p of particles) {
+          p.update();
+          p.draw();
+        }
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
 </body>
 </html>
